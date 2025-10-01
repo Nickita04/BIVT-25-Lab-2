@@ -126,11 +126,10 @@ namespace Lab2
             int c = 0;
 
             // code here
-            double distance = S;
-            double sum = 0;
-
-            for (int day = 1; ; day++)
+            while (true)
             {
+                day++;
+
                 sum += distance;
 
                 if (day <= 7)
@@ -145,10 +144,10 @@ namespace Lab2
                 if (b > 0 && c > 0 && day >= 7)
                     break;
 
-                distance += distance * I / 100.0;
+                distance *= 1 + I / 100.0;
             }
 
-            a = Math.Round(a);
+            a = Math.Round(a, 6);
             // end
 
             return (a, b, c);
