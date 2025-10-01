@@ -125,33 +125,28 @@ namespace Lab2
             int b = 0;
             int c = 0;
 
-            double distance = S;
-            double sum = 0;
-            int day = 0;
-
             // code here
-            while (true)
+            double tempS = S;
+            for (int i = 1; i <= 7; i++)
             {
-                day++;
-
-                sum += distance;
-
-                if (day <= 7)
-                    a += distance;
-
-                if (b == 0 && sum >= 100)
-                    b = day;
-
-                if (c == 0 && distance > 42)
-                    c = day;
-
-                if (b > 0 && c > 0 && day >= 7)
-                    break;
-
-                distance *= 1 + I / 100.0;
+                a += S;
+                S += (S * (I / 100.0));
             }
+            S = tempS;
+            double total = 0;
+            while (total <= 100)
+            {
+                total += S;
+                S += (S * (I / 100));
+                b += 1;
+            }
+            S = tempS;
+            while (S <= 42)
+            {
+                c += 1;
+                S += (S * (I / 100));
 
-            a = Math.Round(a, 6);
+            }
             // end
 
             return (a, b, c);
