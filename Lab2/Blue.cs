@@ -157,27 +157,35 @@ namespace Lab2
             double SY = 0;
 
             // code here
-            double eps = 0.0001;
+            const double eps = 0.0001;
 
-            for (double x = a; x <= b; x += h)
+            if (h <= 0) return (SS, SY);
+
+            for (double x = a; x <= b + 1e-12; x += h)
             {
-                // вычисляем ряд S(x)
-                double Sx = 0;
+                double Sx = 0.0;
                 int i = 0;
                 double term;
+                double fact = 1.0;  
+                double xpow = 1.0;  
+                int maxIter = 1000;
 
                 do
                 {
-                    term = (2 * i + 1) * Math.Pow(x, 2 * i) / Factorial(i);
+                    term = (2 * i + 1) * xpow / fact;
                     Sx += term;
+
                     i++;
+                    if (i > maxIter) break;
+
+                    fact *= i;           
+                    xpow *= x * x;    
                 }
                 while (Math.Abs(term) >= eps);
 
                 SS += Sx;
 
-                // вычисляем аналитическое значение
-                double y = (1 + 2 * x * x) * Math.Exp(x * x);
+                double y = (1.0 + 2.0 * x * x) * Math.Exp(x * x);
                 SY += y;
             }
             // end
