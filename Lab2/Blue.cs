@@ -125,6 +125,10 @@ namespace Lab2
             int b = 0;
             int c = 0;
 
+            double distance = S;
+            double sum = 0;
+            int day = 0;
+
             // code here
             while (true)
             {
