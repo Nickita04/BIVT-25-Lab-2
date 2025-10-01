@@ -12,12 +12,17 @@ namespace Lab2
             double answer = 0;
 
             // code here
-            double term = 1;
-
-            for (int i = 1; i <= n; i++)
+            if (n >= 1)
             {
-                term *= x / i;
-                answer += term;
+                answer += Math.Sin(x);
+            }
+
+            double xPower = 1.0;
+
+            for (int i = 2; i <= n; i++)
+            {
+                xPower *= x;
+                answer += Math.Sin(i * x) / xPower;
             }
             // end
 
@@ -84,15 +89,15 @@ namespace Lab2
             // code here
             double ch = 0;
             double zn = 1;
-            double elem;
+            double elem = 0;
             int i = 1;
 
             do
             {
                 ch += i;
                 zn *= x;
-                elem = ch / zn;
                 answer += elem;
+                elem = ch / zn; 
                 i++;
             }
             while (elem > 0.0001);
@@ -121,32 +126,29 @@ namespace Lab2
             int c = 0;
 
             // code here
-            double distance = S;   
-            double sum = 0;      
+            double distance = S;
+            double sum = 0;
 
             for (int day = 1; ; day++)
             {
                 sum += distance;
 
-                
                 if (day <= 7)
                     a += distance;
 
-               
                 if (b == 0 && sum >= 100)
                     b = day;
 
-               
                 if (c == 0 && distance > 42)
                     c = day;
 
-               
                 if (b > 0 && c > 0 && day >= 7)
                     break;
 
-               
                 distance += distance * I / 100.0;
             }
+
+            a = Math.Round(a);
             // end
 
             return (a, b, c);
