@@ -12,7 +12,13 @@ namespace Lab2
             double answer = 0;
 
             // code here
+            double term = 1;
 
+            for (int i = 1; i <= n; i++)
+            {
+                term *= x / i;
+                answer += term;
+            }
             // end
 
             return answer;
@@ -22,17 +28,34 @@ namespace Lab2
             double answer = 0;
 
             // code here
+            double term = 1;
 
+            for (int i = 1; i <= n; i++)
+            {
+                term *= -5.0 / i;
+                answer += term;
+            }
             // end
 
-            return answer;
+                return answer;
         }
         public long Task3(int n)
         {
             long answer = 0;
 
             // code here
+            if (n <= 0) return answer;
 
+            long a = 0, b = 1;
+            answer = a; // первое число Фибоначчи
+
+            for (int i = 2; i <= n; i++)
+            {
+                answer += b; // добавляем текущее число Фибоначчи к сумме
+                long next = a + b;
+                a = b;
+                b = next;
+            }
             // end
 
             return answer;
@@ -43,6 +66,13 @@ namespace Lab2
 
             // code here
 
+            int n = 0;
+            while (n * (2 * a + (n - 1) * h) / 2 <= L)
+            {
+                n++;
+            }
+            answer = n - 1;
+
             // end
 
             return answer;
@@ -52,7 +82,20 @@ namespace Lab2
             double answer = 0;
 
             // code here
+            double ch = 0;
+            double zn = 1;
+            double elem;
+            int i = 1;
 
+            do
+            {
+                ch += i;
+                zn *= x;
+                elem = ch / zn;
+                answer += elem;
+                i++;
+            }
+            while (elem > 0.0001);
             // end
 
             return answer;
@@ -62,7 +105,11 @@ namespace Lab2
             int answer = 0;
 
             // code here
-
+            while (S < L)
+            {
+                S *= 2;
+                answer += h;
+            }
             // end
 
             return answer;
@@ -74,7 +121,32 @@ namespace Lab2
             int c = 0;
 
             // code here
+            double distance = S;   
+            double sum = 0;      
 
+            for (int day = 1; ; day++)
+            {
+                sum += distance;
+
+                
+                if (day <= 7)
+                    a += distance;
+
+               
+                if (b == 0 && sum >= 100)
+                    b = day;
+
+               
+                if (c == 0 && distance > 42)
+                    c = day;
+
+               
+                if (b > 0 && c > 0 && day >= 7)
+                    break;
+
+               
+                distance += distance * I / 100.0;
+            }
             // end
 
             return (a, b, c);
@@ -85,7 +157,29 @@ namespace Lab2
             double SY = 0;
 
             // code here
+            double eps = 0.0001;
 
+            for (double x = a; x <= b; x += h)
+            {
+                // вычисляем ряд S(x)
+                double Sx = 0;
+                int i = 0;
+                double term;
+
+                do
+                {
+                    term = (2 * i + 1) * Math.Pow(x, 2 * i) / Factorial(i);
+                    Sx += term;
+                    i++;
+                }
+                while (Math.Abs(term) >= eps);
+
+                SS += Sx;
+
+                // вычисляем аналитическое значение
+                double y = (1 + 2 * x * x) * Math.Exp(x * x);
+                SY += y;
+            }
             // end
 
             return (SS, SY);
